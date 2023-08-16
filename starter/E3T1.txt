@@ -1,3 +1,23 @@
 # Describe GuardDuty findings that were detected related to the brute force attack
 
+GuardDuty detected 3 issues:
+- One instance was used for the attack: 
+10.192.11.63 is performing SSH brute force attacks against i-010d05a1bc3bc6517. Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password
+
+- One instance was being attacked by the brute force attack:
+i-084e70a1eacc346cc is performing SSH brute force attacks against 10.192.10.209. Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password
+
+- An API call with root account is performed:
+API call called "DescribeEventAggregates" that was invoked using root credentials from the IP address 118.70.48.206.
+
 # Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information.
+
+- How the GuardDuty can detect the attack:
+GuardDuty keeps tabs on authentication activities, including failed login attempts, and it'll detect if the attack instance is trying to do a brute force attack on the target instance's SSH service.
+If you see a huge amount of failed SSH logins to the target instance, it's probably a sign that a brute force attack is underway.
+
+The logs show a ton of requests being sent from one instance to a particular IP, which suggests that the instance is being used to carry out an SSH brute force attack.
+
+- The documentation:
+"Amazon GuardDuty is a security monitoring service that analyzes and processes Foundational data sources, such as AWS CloudTrail management events, AWS CloudTrail event logs, VPC flow logs (from Amazon EC2 instances), and DNS logs. It also processes Features such as Kubernetes audit logs, RDS login activity, S3 logs, EBS volumes, Runtime monitoring, and Lambda network activity logs. It uses threat intelligence feeds, such as lists of malicious IP addresses and domains, and machine learning to identify unexpected, potentially unauthorized, and malicious activity within your AWS environment. "
+ref: https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html

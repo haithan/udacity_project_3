@@ -1,5 +1,7 @@
 Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
 
 # Poor practice 1
+Not having enough access control: Even though they mention using an IAM role and policy to give access to the S3 bucket with free recipes, they don't mention making sure the web application instance has the right access controls. It's smart to only give it the permissions it needs for its job.
 
 # Poor practice 2
+No configurations are in place to restrict access in the Access Control List (ACL). Both public and private subnet network rules allow all kinds of traffic from any source. This means there's no network segmentation, which could lead to an attack from another instance on an untrustworthy subnet. It's really important to make sure that security groups and network ACLs are set up to avoid any unauthorized access from those kinds of networks.

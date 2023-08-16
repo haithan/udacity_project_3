@@ -1,13 +1,35 @@
 # Identify tools that will allow you to do the following:
 
-## Scan infrastructure as code templates
+## Code scanning - Static Application Security Testing
+SonarQube
 
 ### Example vulnerability
+- SonarQube is capable of detecting possible SQL injection threats in code.
+- Hardcoded credentials
+
+## Scan infrastructure as code templates
+Terrascan
+
+### Example vulnerability
+- Terrascan is able to identify Terraform configurations that establish Amazon S3 buckets with open access.
+- Non-SSL/TLS configuration issue
 
 ##Scan AMI’s or containers for OS vulnerabilities
+Anchore
 
 ### Example vulnerability
+- Detect major security flaw in the container image
+- Detect outdated software versions
+
 
 ##Scan an AWS environment for cloud configuration vulnerabilities
+Chef InSpec or AWS Config
 
 ### Example vulnerability
+AWS Config: 
+- EBS volumes with no encryption
+- Unrestricted security group ingress on uncommon ports
+
+Chef InSpec:
+- Detect SSH root login enabled
+

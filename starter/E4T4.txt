@@ -1,8 +1,16 @@
 
 # What additional architectural change can be made to reduce the internet facing attack surface of the web application instance.
+- Set up an AWS Load Balancer, like an Application Load Balancer or Network Load Balancer, to act as a reverse proxy in front of your web app instance. This way, all incoming traffic will be directed to multiple instances, and all external requests will have just one entry point. Plus, using a load balancer will help protect your instance by hiding its direct IP address and minimizing potential security threats.
 
 # Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent the unauthorized access to the secrets bucket.
+- Yes, Establishing a VPC private endpoint for S3 will create a connection between your VPC and S3 without the need for internet gateways, NAT gateways, or VPN connections. This connection will stay within the AWS network, and not be routed through the public internet. Through this, communication between your web application and S3 buckets (including the secrets bucket) will remain within the private network, meaning S3 does not have to be exposed to the internet directly, and thus reducing potential attack surfaces.
 
 # Will applying default encryption setting to the s3 buckets encrypt the data that already exists?
+- Using the default encryption settings will not automatically encrypt data that is already stored in S3 buckets.
+
+Noted: Amazon S3 now applies server-side encryption with Amazon S3 managed keys (SSE-S3) as the base level of encryption for every bucket in Amazon S3. Starting January 5, 2023, all new object uploads to Amazon S3 are automatically encrypted at no additional cost and with no impact on performance.
+Source: https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html
 
 # What would happen if the original cloud formation templates are applied to this environment.
+
+- Any changes made to the cloud will be undone upon the next cloud formation stack deployment, so the CloudFormation scripts must be updated with the necessary modifications.

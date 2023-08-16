@@ -1,3 +1,26 @@
 Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
 
+From Security Hub
+- Security groups should not allow unrestricted access to ports with high risk [3389, 20, 23, 110, 143, 3306, 8080, 1433, 9200, 9300, 25, 445, 135, 21, 1434, 4333, 5432, 5500, 5601, 22, 3000, 5000, 8088, 8888] 
+- EC2 instances should not have a public IPv4 address
+- Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389
+- Security groups should not allow ingress from 0.0.0.0/0 to port 22
+- Amazon EC2 should be configured to use VPC endpoints that are created for the Amazon EC2 service
+- VPC flow logging should be enabled in all VPCs
+- EC2.19	Security groups should not allow unrestricted access to ports with high risk
+
+From Guard Duty
+- EC2 instance has an unprotected port which is being probed by a known malicious host.
+
+From Inspector
+- Port range 0 to 65535 is reachable from an Internet Gateway - TCP on the instance Web Service Instance - C3
+- Port range 0 to 65535 is reachable from an Internet Gateway - UDP on the instance Web Service Instance - C3
+- Port 22 is reachable from an Internet Gateway - TCP on the instance Web Service Instance - C3
+
 Bonus - provide recommendations on how to remediate the vulnerabilities.
+
+- EC2 instance need to be managed by AWS System Manager
+- Change the source IP or range to only allow access from trusted IP addresses or ranges. If you don't need SSH access from the web, think about getting rid of the rule.
+- Modify the rule of the security group to specify a more restricted port range or remove the rule if it is not necessary.
+- Enabling S3 Block Public Access
+- Requiring SSL/TLS (HTTPS) for S3 Requests

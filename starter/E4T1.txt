@@ -1,5 +1,10 @@
 
 
 # Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+- Limit the SSH connections coming into the security groups that are linked to your instances. Let in SSH connections from reliable IP addresses or sets of addresses only, like the company's internal network or particular VPN access points.
+- Make sure your SSH connection only allows key-based authentication and not passwords. That way, hackers won't be able to guess your passwords and get into your system.
+- Enable VPC Flow Logs to keep track of all the network activity going on in your Virtual Private Cloud (VPC). Scan the logs for anything out of the ordinary or suspicious when it comes to SSH, like a lot of connection requests from a single IP.
 
 # Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
+- Block everyone from viewing the secret recipes bucket except for a few users who really need to see it.
+- Put the ARNs of the users or IAM roles that you want to give access to in the bucket policy.
